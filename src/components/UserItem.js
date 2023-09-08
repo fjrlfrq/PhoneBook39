@@ -71,7 +71,7 @@ export default function UserItem(props) {
     }, [dispatch, user])
 
     return (
-        <Fragment>
+        <View>
             <View>
                 <Text>{props.no}</Text>
                 <Text>
@@ -105,53 +105,53 @@ export default function UserItem(props) {
                 {props.data.sent ?
                     user.isEdit ?
                         <Text>
-                            <button type="button"
+                            <TouchableOpacity
                                 className="btn btn-primary"
                                 style={{ backgroundColor: '#035e07', borderWidth: 0 }}
                                 onClick={saveEdit}>
                                 <i className="bi bi-download"></i>
                                 &nbsp;
                                 save
-                            </button>
+                            </TouchableOpacity>
                             &nbsp;
-                            <button type="button"
+                            <TouchableOpacity
                                 className="btn btn-warning"
                                 onClick={handleCancel}
                                 style={{ color: "white", backgroundColor: '#800503', borderWidth: 0 }}>
                                 <i className="bi bi-x-lg"></i>
                                 &nbsp;
                                 cancel
-                            </button>
+                            </TouchableOpacity>
                         </Text>
                         :
                         <Text>
-                            <button type="button"
+                            <TouchableOpacity
                                 className="btn btn-success"
                                 style={{ backgroundColor: '#04d10e', borderWidth: 0 }}
                                 onClick={handleEdit}>
                                 <i className="bi bi-pencil"></i>
                                 &nbsp;
                                 edit
-                            </button>
+                            </TouchableOpacity>
                             &nbsp;
-                            <button type="button"
+                            <TouchableOpacity
                                 className="btn btn-danger"
                                 style={{ backgroundColor: '#f2190a', borderWidth: 0 }}
                                 onClick={() => handleModalShowHide()}>
                                 <i className="bi bi-trash"></i>
                                 &nbsp;
                                 delete
-                            </button>
+                            </TouchableOpacity>
                         </Text>
                     :
                     <Text>
-                        <button type="button"
+                        <TouchableOpacity
                             className="btn btn-warning"
                             onClick={props.resend}
                             style={{ backgroundColor: '#ffdf2b', borderWidth: 0, color: 'white' }}>
                             <i className="bi bi-send"></i>
                             resend
-                        </button>
+                        </TouchableOpacity>
                     </Text>
                 }
             </View>
@@ -171,10 +171,12 @@ export default function UserItem(props) {
                 </Modal.Footer>
             </Modal>
 
-        </Fragment>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
-    
+    container: {
+        
+    },
 })
