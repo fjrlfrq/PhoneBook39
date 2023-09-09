@@ -38,7 +38,7 @@ export default function UserForm(props) {
             props.submitLabel
                 ? handleSearch :
                 handleSubmit}>
-            <div className="row g-3 align-items-center">
+            <View>
 
                 <TextInput
                     style={{ height: 40 }}
@@ -50,11 +50,11 @@ export default function UserForm(props) {
                 <TextInput
                     style={{ height: 40 }}
                     placeholder="Enter Your Number"
-                    onChangeText={name => setUser({ ...user, phone })}
+                    onChangeText={phone => setUser({ ...user, phone })}
                     defaultValue={user.phone}
                 />
 
-                <div className="col-auto">
+                <View>
                     <button type="submit" className="btn btn-success"
                         style={{ backgroundColor: '#1159a6', borderWidth: 0 }}>
                         {props.submitLabel !== "search" &&
@@ -87,8 +87,8 @@ export default function UserForm(props) {
                             Reset</button>
                     }
 
-                </div>
-            </div>
+                </View>
+            </View>
         </View>
 
     )
