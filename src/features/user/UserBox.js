@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react"
 import UserForm from "./UserForm"
 import UserList from "./UserList"
 import { useDispatch } from 'react-redux'
+import { View } from "react-native"
 
 export default function User(props) {
 
@@ -26,7 +27,12 @@ export default function User(props) {
     }, [dispatch])
 
     return (
-        <div className="container mt-5">
+        <View style={{ 
+            flex: 1, 
+            flexDirection: "column", 
+            alignItems: "center", 
+            justifyContent: "flex-start"
+            }}>
             <div className="card">
                 <div className=" shadow mb-4">
                     <div className="card-header pt-4 pb-3">
@@ -73,6 +79,6 @@ export default function User(props) {
                     <UserList />
                 </div>
             </div>
-        </div>
+        </View>
     )
 } 

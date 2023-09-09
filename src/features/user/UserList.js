@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect } from "react";
+import { View, Text } from "react-native/types";
 import { useSelector, useDispatch } from 'react-redux'
 
 import UserItem from "../../components/UserItem";
@@ -32,16 +33,7 @@ export default function UserList(props) {
 
     return (
         <div onScroll={scrolling} style={{ overflowY: "scroll", height: 315 }}>
-            <table className="table table-striped">
-                <thead>
-                    <tr>
-                        <th> No </th>
-                        <th> Name </th>
-                        <th> Phone </th>
-                        <th> Actions </th>
-                    </tr>
-                </thead>
-                <tbody>
+            <View style={{ flex: 1, }}>
                     {users.map((user, index) => (
                         <UserItem
                             key={user.id}
@@ -53,8 +45,10 @@ export default function UserList(props) {
                             update={(name, phone) => dispatch(updateUserAsync({id: user.id, name, phone}))}
                         />
                     ))}
-                </tbody>
-            </table>
+            </View>
         </div>
     )
 }
+
+const styles = ({
+})

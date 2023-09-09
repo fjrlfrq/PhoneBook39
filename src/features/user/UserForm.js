@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react"
+import { View, TextInput } from "react-native"
 
 import { useDispatch } from 'react-redux'
 
@@ -17,18 +18,7 @@ export default function UserForm(props) {
         phone: ''
     })
 
-    const handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        setUser({
-            ...user,
-            [name]: value,
-        })
-    }
-
-    const handleSubmit = useCallback((event) => {
-        event.preventDefault()
+    const handleSubmit = useCallback(() => {
         dispatch(create(user.name, user.phone))
         setUser({ name: '', phone: '' })
     }, [dispatch, user])
@@ -44,35 +34,25 @@ export default function UserForm(props) {
     }
 
     return (
-        <form onSubmit={
+        <View onSubmit={
             props.submitLabel
                 ? handleSearch :
                 handleSubmit}>
             <div className="row g-3 align-items-center">
 
-                <div className="col">
-                    <input
-                        type="teks"
-                        placeholder="Enter your name"
-                        id="name"
-                        name="name"
-                        className="form-control"
-                        onChange={handleInputChange}
-                        value={user.name}
-                    />
-                </div>
+                <TextInput
+                    style={{ height: 40 }}
+                    placeholder="Enter Your Name"
+                    onChangeText={name => setUser({ ...user, name })}
+                    defaultValue={user.name}
+                />
 
-                <div className="col">
-                    <input
-                        type="teks"
-                        placeholder="Enter your number"
-                        id="phone"
-                        name="phone"
-                        className="form-control"
-                        onChange={handleInputChange}
-                        value={user.phone}
-                    />
-                </div>
+                <TextInput
+                    style={{ height: 40 }}
+                    placeholder="Enter Your Number"
+                    onChangeText={name => setUser({ ...user, phone })}
+                    defaultValue={user.phone}
+                />
 
                 <div className="col-auto">
                     <button type="submit" className="btn btn-success"
@@ -109,7 +89,7 @@ export default function UserForm(props) {
 
                 </div>
             </div>
-        </form>
+        </View>
 
     )
 }

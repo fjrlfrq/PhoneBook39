@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native"
+import { View, Text, TouchableOpacity, ViewBase } from "react-native"
 import React, { Fragment, useCallback, useState } from "react"
 import { Button, Modal } from 'react-bootstrap'
 import { useDispatch } from "react-redux"
@@ -13,18 +13,6 @@ export default function UserItem(props) {
         isEdit: false,
         showHide: false
     })
-
-    const handleInputChange = (event) => {
-        const target = event.target
-        const value = target.type === 'checkbox' ? target.checked : target.value
-        const name = target.name
-        const phone = target.phone
-        setUser({
-            ...user,
-            [name]: value,
-            [phone]: value
-        })
-    }
 
     const handleEdit = useCallback((event) => {
         event.preventDefault()
@@ -55,128 +43,118 @@ export default function UserItem(props) {
         });
     }, [dispatch, user])
 
-    const handleModalShowHide = useCallback(() => {
-        setUser({
-            showHide: true
-        })
-    }, [])
-
-    const cancelHandleModalShowHide = useCallback((event) => {
-        event.preventDefault()
+    const showModal = useCallback(() => {
         setUser({
             name: props.data.name,
             phone: props.data.phone,
-            showHide: false
+            modal: true
         })
-    }, [dispatch, user])
+    })
+
+    const showHide = useCallback(() => {
+        setUser({
+            name: props.data.name,
+            phone: props.data.phone,
+            modal: false
+        })
+    })
 
     return (
         <View>
-            <View>
+            <View style={{ flex: 1 }}>
                 <Text>{props.no}</Text>
-                <Text>
+                <View>
                     {user.isEdit ?
                         <TextInput
-                            type="teks"
-                            name="name"
-                            value={user.name}
-                            onChange={handleInputChange}
-                            className="form-control"
+                            style={{ height: 40 }}
+                            placeholder="Enter Your Name"
+                            onChangeText={name => setUser({ ...user, name })}
+                            defaultValue={user.name}
+                            autoFocus={true}
                         />
                         :
-                        user.name
+                        <View>
+                            <Text>{user.name}</Text>
+                        </View>
                     }
-                </Text>
+                </View>
 
-                <Text>
+                <View>
                     {user.isEdit ?
                         <TextInput
-                            type="teks"
-                            name="phone"
-                            value={user.phone}
-                            onChange={handleInputChange}
-                            className="form-control"
+                            style={{ height: 40 }}
+                            placeholder="Enter Your Number"
+                            onChangeText={name => setUser({ ...user, phone })}
+                            defaultValue={user.phone}
+                            autoFocus={true}
                         />
                         :
-                        user.phone
+                        <View>
+                            <Text>{user.phone}</Text>
+                        </View>
                     }
-                </Text>
+                </View>
 
-                {props.data.sent ?
-                    user.isEdit ?
-                        <Text>
-                            <TouchableOpacity
-                                className="btn btn-primary"
-                                style={{ backgroundColor: '#035e07', borderWidth: 0 }}
-                                onClick={saveEdit}>
-                                <i className="bi bi-download"></i>
-                                &nbsp;
-                                save
-                            </TouchableOpacity>
-                            &nbsp;
-                            <TouchableOpacity
-                                className="btn btn-warning"
-                                onClick={handleCancel}
-                                style={{ color: "white", backgroundColor: '#800503', borderWidth: 0 }}>
-                                <i className="bi bi-x-lg"></i>
-                                &nbsp;
-                                cancel
-                            </TouchableOpacity>
-                        </Text>
+
+                <View>
+                    {props.data.sent ?
+                        user.isEdit ?
+                            <View>
+                                <TouchableOpacity style={{ marginHorizontal: 5, elevation: 2 }} onPress={saveEdit}>
+                                    <Icon name="save" size={30} color="#85b35a" />
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={handleCancel}>
+                                    <Icon name="arrow-back-circle" size={30} color="#bdd9a0" />
+                                </TouchableOpacity>
+                            </View>
+                            :
+                            <View>
+                                <TouchableOpacity style={{ marginHorizontal: 5, elevation: 2 }} onPress={handleEdit}>
+                                    <Icon name="create" size={30} color="#85b35a" />
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={showModal}>
+                                    <Icon name="close-circle" size={30} color="#bdd9a0" />
+                                </TouchableOpacity>
+                            </View>
                         :
-                        <Text>
-                            <TouchableOpacity
-                                className="btn btn-success"
-                                style={{ backgroundColor: '#04d10e', borderWidth: 0 }}
-                                onClick={handleEdit}>
-                                <i className="bi bi-pencil"></i>
-                                &nbsp;
-                                edit
-                            </TouchableOpacity>
-                            &nbsp;
-                            <TouchableOpacity
-                                className="btn btn-danger"
-                                style={{ backgroundColor: '#f2190a', borderWidth: 0 }}
-                                onClick={() => handleModalShowHide()}>
-                                <i className="bi bi-trash"></i>
-                                &nbsp;
-                                delete
-                            </TouchableOpacity>
-                        </Text>
-                    :
-                    <Text>
-                        <TouchableOpacity
-                            className="btn btn-warning"
-                            onClick={props.resend}
-                            style={{ backgroundColor: '#ffdf2b', borderWidth: 0, color: 'white' }}>
-                            <i className="bi bi-send"></i>
-                            resend
+                        <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={props.resend}>
+                            <Icon name="refresh-circle" size={30} color="#4a8122" />
                         </TouchableOpacity>
-                    </Text>
-                }
+                    }
+                </View>
             </View>
 
-            <Modal show={user.showHide}>
-                <Modal.Header >
-                    <Modal.Title style={{ color: '#2bb5ff' }}>Deleted Confirmation</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Are you sure, you want delete <b style={{ color: '#2bb5ff' }}>{props.data.name}</b></Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={cancelHandleModalShowHide} style={{ backgroundColor: '#f2190a', borderWidth: 0, color: 'white' }}>
-                        No
-                    </Button>
-                    <Button variant="primary" onClick={props.remove} style={{ backgroundColor: '#04d10e', borderWidth: 0, color: 'white' }}>
-                        Yes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            <View>
+                <Modal show={user.showHide}>
+                    <View style={styles.modalListIcon}>
+                        <Icon name="alert-circle" size={80} color="#173e07"
+                            style={styles.modalIcon} />
+                    </View>
 
-        </View>
+                    <Text style={styles.titleModal}>Deleted Confirmation</Text>
+                    <Text style={{ textAlign: 'center', fontSize: 17, color: 'gray' }}>
+                        Are you sure you want delete it?
+                    </Text>
+                    <Text style={{ textAlign: 'center', fontSize: 17, fontWeight: 'bold', color: '#173e07' }}>
+                        " {props.data.name} "
+                    </Text>
+                    <View>
+                        <TouchableOpacity style={styles.modalNo} onPress={hideModal}>
+                            <Text style={{ color: '#ffffff' }}> No</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.modalYes} onPress={props.remove}>
+                            <Text style={{ color: '#ffffff' }}> Yes</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
+            </View>
+
+        </View >
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        
+
     },
 })
