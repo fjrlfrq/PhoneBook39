@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import { View, Text } from "react-native/types";
+import { View, Text } from "react-native";
 import { useSelector, useDispatch } from 'react-redux'
 
 import UserItem from "../../components/UserItem";

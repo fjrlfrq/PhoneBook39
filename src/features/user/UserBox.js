@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react"
 import UserForm from "./UserForm"
 import UserList from "./UserList"
 import { useDispatch } from 'react-redux'
-import { View } from "react-native"
+import { View, Text, TouchableOpacity } from "react-native"
 
 export default function User(props) {
 
@@ -26,59 +26,71 @@ export default function User(props) {
         })
     }, [dispatch])
 
+    const cancelSearch = useCallback(() => {
+        dispatch(resetSearch())
+        setUser({ name: '', phone: '' })
+    }, [dispatch])
+
     return (
-        <View style={{ 
-            flex: 1, 
-            flexDirection: "column", 
-            alignItems: "center", 
-            justifyContent: "flex-start"
-            }}>
-            <div className="card">
-                <div className=" shadow mb-4">
-                    <div className="card-header pt-4 pb-3">
-                        <h2>PHONEBOOK</h2>
-                    </div>
-                </div>
+        <View>
+            <View>
+                <View>
+                    <View>
+                        <TouchableOpacity onPress={cancelSearch}>
+                            <Text>
+                                PhoneBook
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
 
-                <div className="card-body">
+                <View>
                     {user.isAdd ?
-                        <div className="card shadow mb-4">
-                            <div className="card-header py-3">
-                                <h6 className="m-0 font-weight-bold">Adding Form</h6>
-                            </div>
+                        <View>
+                            <View>
+                                <Text>Adding Form</Text>
+                            </View>
 
-                            <div className="card-body">
+                            <View>
                                 <UserForm
                                     cancel={handleCancel}
                                 />
-                            </div>
-                        </div>
+                            </View>
+                        </View>
                         :
-                        <div className="mb-4">
-                            <button type="submit"
-                                className="btn btn-primary"
-                                onClick={handleAdd}>
-                                <i className="bi bi-plus-lg"></i>
-                                &nbsp;
-                                add
-                            </button>
-                        </div>
+                        <View>
+                             <TouchableOpacity style={{
+                                flex: 1,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: user.activeMenu == 'Add' ? '#4a8122' : '#ffffff',
+                                elevation: user.activeMenu == 'Add' ? 2 : 0,
+                                paddingVertical: 10,
+                                borderRadius: 10,
+                            }}
+                                onPress={handleAdd}
+                            >
+                                <Text style={{ color: user.activeMenu == 'Add' ? '#ffffff' : '#4a8122', fontWeight: 'bold', letterSpacing: 1, fontSize: 19, margin: -2 }}>
+                                    add
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
                     }
 
-                    <div className="card shadow mb-5">
-                        <div className="card-header py-3" style={{ backgroundColor: '#e9f3e0' }}>
-                            <h6 className="m-0 font-weight-bold" style={{ color: '#2bb5ff' }}>Search Form</h6>
-                        </div>
-                        <div className="card-body">
+                    <View>
+                        <View>
+                            <Text style={{ color: '#2bb5ff' }}>Search Form</Text>
+                        </View>
+                        <View>
                             <UserForm
                                 submitLabel="search"
                             />
-                        </div>
-                    </div>
+                        </View>
+                    </View>
 
                     <UserList />
-                </div>
-            </div>
+                </View>
+            </View>
         </View>
     )
 } 

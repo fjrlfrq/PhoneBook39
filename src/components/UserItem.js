@@ -1,6 +1,5 @@
-import { View, Text, TouchableOpacity, ViewBase } from "react-native"
+import { View, Text, TouchableOpacity, ViewBase, StyleSheet } from "react-native"
 import React, { Fragment, useCallback, useState } from "react"
-import { Button, Modal } from 'react-bootstrap'
 import { useDispatch } from "react-redux"
 
 export default function UserItem(props) {
@@ -139,7 +138,7 @@ export default function UserItem(props) {
                         " {props.data.name} "
                     </Text>
                     <View>
-                        <TouchableOpacity style={styles.modalNo} onPress={hideModal}>
+                        <TouchableOpacity style={styles.modalNo} onPress={showHide}>
                             <Text style={{ color: '#ffffff' }}> No</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.modalYes} onPress={props.remove}>
