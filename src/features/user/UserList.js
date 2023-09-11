@@ -24,15 +24,15 @@ export default function UserList(props) {
         dispatch(readUserAsync())
     }, [dispatch]);
 
-    const scrolling = useCallback((event) => {
-        var element = event.target;
-        if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-            dispatch(loadUserAsync())
-        }
-    }, [dispatch])
+    // const scrolling = useCallback((event) => {
+    //     var element = event.target;
+    //     if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+    //         dispatch(loadUserAsync())
+    //     }
+    // }, [dispatch])
 
     return (
-        <div onScroll={scrolling} style={{ overflowY: "scroll", height: 315 }}>
+        <View>
             <View style={{ flex: 1, }}>
                     {users.map((user, index) => (
                         <UserItem
@@ -46,9 +46,6 @@ export default function UserList(props) {
                         />
                     ))}
             </View>
-        </div>
+        </View>
     )
 }
-
-const styles = ({
-})

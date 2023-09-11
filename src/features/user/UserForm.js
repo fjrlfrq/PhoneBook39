@@ -55,37 +55,8 @@ export default function UserForm(props) {
                 />
 
                 <View>
-                    <button type="submit" className="btn btn-success"
-                        style={{ backgroundColor: '#1159a6', borderWidth: 0 }}>
-                        {props.submitLabel !== "search" &&
-                            
-                        }
-                        {props.submitLabel === "search" &&
-                            
-                        }
-                        &nbsp;
-                        {props.submitLabel || "Save"
-                        }
-                    </button>
-                    &nbsp;
-                    {props.submitLabel !== "search" &&
-                        <button type="submit"
-                            onClick={props.cancel}
-                            className="btn btn-warning"
-                            style={{ backgroundColor: 'a-so#f2af05', borderWidth: 0, color: 'white' }}>
-                            <i className="bi bi-arrow-left"></i>
-                            &nbsp;
-                            Back</button>
-                    }
-                    {props.submitLabel === "search" &&
-                        <button type="submit"
-                            onClick={cancelSearch}
-                            className="btn btn-warning"
-                            style={{ backgroundColor: '#f2af05', borderWidth: 0, color: 'white' }}>
-                            <i className="bi bi-arrow-clockwise"></i>
-                            &nbsp;
-                            Reset</button>
-                    }
+                    
+                    
 
                 </View>
             </View>
