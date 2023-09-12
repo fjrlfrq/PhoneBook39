@@ -14,18 +14,17 @@ export default function User(props) {
 
     const [user, setUser] = useState({
         isAdd: false,
+        activeMenu: '',
     })
 
-    const handleAdd = useCallback((event) => {
-        event.preventDefault()
+    const handleAdd = useCallback(() => {
         setUser({
             isAdd: true,
             activeMenu: 'Add',
         });
     }, [dispatch])
 
-    const handleCancel = useCallback((event) => {
-        event.preventDefault()
+    const handleCancel = useCallback(() => {
         setUser({
             isAdd: false,
             isSearch: false,
@@ -51,7 +50,7 @@ export default function User(props) {
                                 fontSize: 32,
                                 fontWeight: '700',
                                 color: '#4a8122',
-                                marginTop: 10,
+                                marginTop: 10
                             }}>
                                 PhoneBook
                             </Text>
@@ -118,7 +117,7 @@ export default function User(props) {
             </View>
         </SafeAreaView>
     )
-} 
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -131,6 +130,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         color: '#173e07',
         marginTop: 10,
+        textAlign: 'center'
     },
     box: {
         marginHorizontal: windowWidth * 0.03,
