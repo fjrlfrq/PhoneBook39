@@ -1,5 +1,7 @@
 import { View, Text, TouchableOpacity, ViewBase, StyleSheet } from "react-native"
 import React, { Fragment, useCallback, useState } from "react"
+import Icon from 'react-native-vector-icons/Ionicons';
+import Modal from "react-native-modal";
 import { useDispatch } from "react-redux"
 
 export default function UserItem(props) {
@@ -98,27 +100,27 @@ export default function UserItem(props) {
                 <View>
                     {props.data.sent ?
                         user.isEdit ?
-                            <View>
-                                <TouchableOpacity style={{ marginHorizontal: 5, elevation: 2 }} onPress={saveEdit}>
-                                    <Icon name="save" size={30} color="#85b35a" />
-                                </TouchableOpacity>
-                                <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={handleCancel}>
-                                    <Icon name="arrow-back-circle" size={30} color="#bdd9a0" />
-                                </TouchableOpacity>
-                            </View>
-                            :
-                            <View>
-                                <TouchableOpacity style={{ marginHorizontal: 5, elevation: 2 }} onPress={handleEdit}>
-                                    <Icon name="create" size={30} color="#85b35a" />
-                                </TouchableOpacity>
-                                <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={showModal}>
-                                    <Icon name="close-circle" size={30} color="#bdd9a0" />
-                                </TouchableOpacity>
-                            </View>
-                        :
-                        <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={props.resend}>
-                            <Icon name="refresh-circle" size={30} color="#4a8122" />
+                        <View style={{ flexDirection: "row" }}>
+                        <TouchableOpacity style={{ marginHorizontal: 5, elevation: 2 }} onPress={saveEdit}>
+                            <Icon name="save" size={30} color="#85b35a" />
                         </TouchableOpacity>
+                        <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={handleCancel}>
+                            <Icon name="arrow-back-circle" size={30} color="#bdd9a0" />
+                        </TouchableOpacity>
+                    </View>
+                    :
+                    <View style={{ flexDirection: "row" }}>
+                        <TouchableOpacity style={{ marginHorizontal: 5, elevation: 2 }} onPress={handleEdit}>
+                            <Icon name="create" size={30} color="#4a8122" />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={showModal}>
+                            <Icon name="close-circle" size={30} color="#85b35a" />
+                        </TouchableOpacity>
+                    </View>
+                    :
+                    <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={props.resend}>
+                        <Icon name="refresh-circle" size={30} color="#4a8122" />
+                    </TouchableOpacity>
                     }
                 </View>
             </View>

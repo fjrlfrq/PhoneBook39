@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const request = axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: 'http://192.168.1.8:3000/',
     timeout: 1000,
     headers: { 'X-Custom-Header': 'foobar' }
 });

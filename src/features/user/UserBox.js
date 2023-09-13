@@ -27,9 +27,15 @@ export default function User(props) {
     const handleCancel = useCallback(() => {
         setUser({
             isAdd: false,
-            isSearch: false,
 
         })
+    }, [dispatch])
+
+    const handleSearch = useCallback(() => {
+        setUser({
+            isSearch: true,
+            activeMenu: 'Search',
+        });
     }, [dispatch])
 
     const cancelSearch = useCallback(() => {
@@ -88,10 +94,10 @@ export default function User(props) {
                                 paddingVertical: 10,
                                 borderRadius: 10,
                             }}
-                                onPress={handleAdd}
+                                onPress={handleSearch}
                             >
                                 <Text style={{ color: user.activeMenu == 'Search' ? '#ffffff' : '#4a8122', fontWeight: 'bold', letterSpacing: 1, fontSize: 19, margin: -2 }}>
-                                    search
+                                    Search
                                 </Text>
                             </TouchableOpacity>
 
@@ -107,13 +113,38 @@ export default function User(props) {
                                 onPress={handleAdd}
                             >
                                 <Text style={{ color: user.activeMenu == 'Add' ? '#ffffff' : '#4a8122', fontWeight: 'bold', letterSpacing: 1, fontSize: 19, margin: -2 }}>
-                                    add
+                                    Add
                                 </Text>
                             </TouchableOpacity>
 
                         </View>
                     </View>
+                    <View>
+                        <View>
+                            {user.isAdd ?
+                                <View>
+                                    <UserForm />
+                                </View>
+                                :
+                                ''
+                            }
+                        </View>
+
+                        <View>
+                            {user.isSearch ?
+                                <View>
+                                    <UserSearch />
+                                </View>
+                                :
+                                ''
+                            }
+                        </View>
+                        <View style={{ marginTop: 15 }} />
+                    </View>
                 </View>
+            </View>
+            <View style={{ flex: 1 }}>
+                <UserList />
             </View>
         </SafeAreaView>
     )
