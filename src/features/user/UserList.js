@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect } from "react";
-import { View, Text } from "react-native";
+import React, { useEffect } from "react";
+import { FlatList, KeyboardAvoidingView, View } from "react-native";
 import { useSelector, useDispatch } from 'react-redux'
 
 import UserItem from "../../components/UserItem";
@@ -32,8 +32,8 @@ export default function UserList(props) {
     // }, [dispatch])
 
     return (
-        <View>
-            <View style={{ flex: 1, }}>
+        <KeyboardAvoidingView>
+            <View style={{}}>
                     {users.map((user, index) => (
                         <UserItem
                             key={user.id}
@@ -46,6 +46,6 @@ export default function UserList(props) {
                         />
                     ))}
             </View>
-        </View>
+        </KeyboardAvoidingView>
     )
 }

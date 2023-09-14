@@ -1,8 +1,13 @@
 import { View, Text, TouchableOpacity, ViewBase, StyleSheet } from "react-native"
 import React, { Fragment, useCallback, useState } from "react"
 import Icon from 'react-native-vector-icons/Ionicons';
-import Modal from "react-native-modal";
 import { useDispatch } from "react-redux"
+import { View, Text, TouchableOpacity, StyleSheet, TextInput } from "react-native"
+import { useCallback, useState } from "react"
+import Modal from "react-native-modal";
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export default function UserItem(props) {
 
@@ -12,11 +17,10 @@ export default function UserItem(props) {
         name: props.data.name,
         phone: props.data.phone,
         isEdit: false,
-        showHide: false
+        modal: false
     })
 
-    const handleEdit = useCallback((event) => {
-        event.preventDefault()
+    const handleEdit = useCallback(() => {
         setUser({
             name: user.name,
             phone: user.phone,
@@ -24,8 +28,7 @@ export default function UserItem(props) {
         });
     }, [user])
 
-    const handleCancel = useCallback((event) => {
-        event.preventDefault()
+    const handleCancel = useCallback(() => {
         setUser({
             name: props.data.name,
             phone: props.data.phone,
@@ -33,8 +36,7 @@ export default function UserItem(props) {
         });
     }, [])
 
-    const saveEdit = useCallback((event) => {
-        event.preventDefault()
+    const saveEdit = useCallback(() => {
         props.update(user.name, user.phone)
         setUser({
             ...user,
@@ -100,26 +102,26 @@ export default function UserItem(props) {
                 <View>
                     {props.data.sent ?
                         user.isEdit ?
-                        <View style={{ flexDirection: "row" }}>
-                        <TouchableOpacity style={{ marginHorizontal: 5, elevation: 2 }} onPress={saveEdit}>
-                            <Icon name="save" size={30} color="#85b35a" />
+                        <View style={{}}>
+                        <TouchableOpacity style={{}} onPress={saveEdit}>
+                            <Icon name="" size={30} color="#85b35a" />
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={handleCancel}>
-                            <Icon name="arrow-back-circle" size={30} color="#bdd9a0" />
-                        </TouchableOpacity>
-                    </View>
-                    :
-                    <View style={{ flexDirection: "row" }}>
-                        <TouchableOpacity style={{ marginHorizontal: 5, elevation: 2 }} onPress={handleEdit}>
-                            <Icon name="create" size={30} color="#4a8122" />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={showModal}>
-                            <Icon name="close-circle" size={30} color="#85b35a" />
+                        <TouchableOpacity style={{}} onPress={handleCancel}>
+                            <Icon name="" size={30} color="#bdd9a0" />
                         </TouchableOpacity>
                     </View>
                     :
-                    <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={props.resend}>
-                        <Icon name="refresh-circle" size={30} color="#4a8122" />
+                    <View style={{}}>
+                        <TouchableOpacity style={{}} onPress={handleEdit}>
+                            <Icon name="" size={30} color="#4a8122" />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{}} onPress={showModal}>
+                            <Icon name="" size={30} color="#85b35a" />
+                        </TouchableOpacity>
+                    </View>
+                    :
+                    <TouchableOpacity style={{}} onPress={props.resend}>
+                        <Icon name="" size={30} color="#4a8122" />
                     </TouchableOpacity>
                     }
                 </View>
@@ -127,24 +129,24 @@ export default function UserItem(props) {
 
             <View>
                 <Modal show={user.showHide}>
-                    <View style={styles.modalListIcon}>
-                        <Icon name="alert-circle" size={80} color="#173e07"
-                            style={styles.modalIcon} />
+                    <View style={{}}>
+                        <Icon name="" size={80} color="#173e07"
+                            style={{}} />
                     </View>
 
-                    <Text style={styles.titleModal}>Deleted Confirmation</Text>
-                    <Text style={{ textAlign: 'center', fontSize: 17, color: 'gray' }}>
+                    <Text style={{}}>Deleted Confirmation</Text>
+                    <Text style={{}}>
                         Are you sure you want delete it?
                     </Text>
-                    <Text style={{ textAlign: 'center', fontSize: 17, fontWeight: 'bold', color: '#173e07' }}>
+                    <Text style={{}}>
                         " {props.data.name} "
                     </Text>
                     <View>
-                        <TouchableOpacity style={styles.modalNo} onPress={showHide}>
-                            <Text style={{ color: '#ffffff' }}> No</Text>
+                        <TouchableOpacity style={{}} onPress={showHide}>
+                            <Text style={{}}> No</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.modalYes} onPress={props.remove}>
-                            <Text style={{ color: '#ffffff' }}> Yes</Text>
+                        <TouchableOpacity style={{}} onPress={props.remove}>
+                            <Text style={{}}> Yes</Text>
                         </TouchableOpacity>
                     </View>
                 </Modal>
@@ -154,8 +156,4 @@ export default function UserItem(props) {
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-
-    },
-})
+const styles = StyleSheet.create({})

@@ -6,7 +6,7 @@ import { View, Text, TouchableOpacity, Dimensions, SafeAreaView, StyleSheet } fr
 import Icon from 'react-native-vector-icons';
 
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+// const windowHeight = Dimensions.get('window').height;
 
 export default function User(props) {
 
@@ -27,92 +27,36 @@ export default function User(props) {
     const handleCancel = useCallback(() => {
         setUser({
             isAdd: false,
-
         })
     }, [dispatch])
 
-    const handleSearch = useCallback(() => {
-        setUser({
-            isSearch: true,
-            activeMenu: 'Search',
-        });
-    }, [dispatch])
-
-    const cancelSearch = useCallback(() => {
-        dispatch(resetSearch())
-        setUser({ name: '', phone: '' })
-    }, [dispatch])
-
     return (
-        <SafeAreaView style={{ flex: 1, }}>
-            <View style={{
-                paddingHorizontal: windowWidth * 0.05,
-                backgroundColor: '#e9f3e0',
-            }}>
+        <SafeAreaView style={{}}>
+            <View style={{}}>
                 <View>
-                    {user.activeMenu == 'Search' || user.activeMenu == 'Add' ?
-                        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={handleCancel}>
-                            <Text style={{
-                                fontSize: 32,
-                                fontWeight: '700',
-                                color: '#4a8122',
-                                marginTop: 10
-                            }}>
+                    {user.activeMenu == 'Add' ?
+                        <TouchableOpacity onPress={handleCancel}>
+                            <Text style={{}}>
                                 PhoneBook
                             </Text>
-                            <Icon name="backward" size={20} color="#4a8122" style={{ paddingHorizontal: 4, marginTop: 20 }} />
+                            <Icon name="backward" size={20} color="#4a8122" style={{}} />
                         </TouchableOpacity>
                         :
-                        <TouchableOpacity onPress={cancelSearch}>
-                            <Text style={styles.title}>
+                        <TouchableOpacity onPress={}>
+                            <Text style={{}}>
                                 PhoneBook
                             </Text>
                         </TouchableOpacity>
                     }
                 </View>
 
-                <View style={styles.box}>
+                <View style={{}}>
 
                     <View>
-                        <View style={{
-                            flexDirection: 'row',
-                            marginTop: 5,
-                            marginBottom: 5,
-                            paddingVertical: 5,
-                            paddingHorizontal: 5,
-                            borderRadius: 10,
-                            backgroundColor: '#ffffff',
-                            elevation: 2,
-                            width: '100%',
-                        }}>
-                            <TouchableOpacity style={{
-                                flex: 1,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: user.activeMenu == 'Search' ? '#4a8122' : '#ffffff',
-                                elevation: user.activeMenu == 'Search' ? 2 : 0,
-                                paddingVertical: 10,
-                                borderRadius: 10,
-                            }}
-                                onPress={handleSearch}
-                            >
-                                <Text style={{ color: user.activeMenu == 'Search' ? '#ffffff' : '#4a8122', fontWeight: 'bold', letterSpacing: 1, fontSize: 19, margin: -2 }}>
-                                    Search
-                                </Text>
-                            </TouchableOpacity>
+                        <View style={{}}>
 
-                            <TouchableOpacity style={{
-                                flex: 1,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: user.activeMenu == 'Add' ? '#4a8122' : '#ffffff',
-                                elevation: user.activeMenu == 'Add' ? 2 : 0,
-                                paddingVertical: 10,
-                                borderRadius: 10,
-                            }}
-                                onPress={handleAdd}
-                            >
-                                <Text style={{ color: user.activeMenu == 'Add' ? '#ffffff' : '#4a8122', fontWeight: 'bold', letterSpacing: 1, fontSize: 19, margin: -2 }}>
+                            <TouchableOpacity style={{}}>
+                                <Text style={{}}>
                                     Add
                                 </Text>
                             </TouchableOpacity>
@@ -129,61 +73,15 @@ export default function User(props) {
                                 ''
                             }
                         </View>
-
-                        <View>
-                            {user.isSearch ?
-                                <View>
-                                    <UserSearch />
-                                </View>
-                                :
-                                ''
-                            }
-                        </View>
-                        <View style={{ marginTop: 15 }} />
                     </View>
+
                 </View>
             </View>
-            <View style={{ flex: 1 }}>
+            <View style={{}}>
                 <UserList />
             </View>
         </SafeAreaView>
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        paddingHorizontal: windowWidth * 0.05,
-        // marginVertical: windowHeight * 0.01,
-        backgroundColor: '#e9f3e0',
-    },
-    title: {
-        fontSize: 32,
-        fontWeight: '700',
-        color: '#173e07',
-        marginTop: 10,
-        textAlign: 'center'
-    },
-    box: {
-        marginHorizontal: windowWidth * 0.03,
-        justifyContent: 'center',
-    },
-    footer: {
-        // flex: 1,
-        backgroundColor: '#e9f3e0',
-        width: '100%',
-        height: 50,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    textFooter: {
-        color: '#173e07',
-        fontSize: 12
-    },
-    textFooterName: {
-        color: '#173e07',
-        fontWeight: 'bold',
-        paddingHorizontal: 3,
-        fontSize: 12
-    }
-});
+const styles = StyleSheet.create({});

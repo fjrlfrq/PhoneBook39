@@ -3,11 +3,7 @@ import { View, TextInput } from "react-native"
 
 import { useDispatch } from 'react-redux'
 
-import {
-    create,
-    resetSearch,
-    searchUserAsync,
-} from './UserSlice'
+import { create } from './UserSlice'
 
 export default function UserForm(props) {
 
