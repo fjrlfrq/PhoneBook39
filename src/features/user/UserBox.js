@@ -42,7 +42,7 @@ export default function User(props) {
                             <Icon name="backward" size={20} color="#4a8122" style={{}} />
                         </TouchableOpacity>
                         :
-                        <TouchableOpacity onPress={}>
+                        <TouchableOpacity>
                             <Text style={{}}>
                                 PhoneBook
                             </Text>
