@@ -1,13 +1,11 @@
-import React, { useCallback, useState, useRef } from "react"
-import { Text, TextInput, View, StyleSheet, TouchableOpacity, Dimensions } from "react-native"
-
-const windowWidth = Dimensions.get('window').width;
+import React, { useCallback, useState, useEffect, useRef } from "react"
 
 import { useDispatch } from 'react-redux'
+import { Text, TextInput, View, StyleSheet, TouchableOpacity } from "react-native";
 
-import { create } from './UserSlice'
+import { resetSearch, searchUserAsync } from './UserSlice';
 
-export default function UserForm() {
+export default function UserSearch() {
 
     const dispatch = useDispatch()
     const inputRef = useRef(null)
@@ -15,31 +13,28 @@ export default function UserForm() {
     const [user, setUser] = useState({
         name: '',
         phone: ''
-    })
+    });
 
-    const handleSubmit = useCallback(() => {
-        dispatch(create(user.name, user.phone))
-        setUser({ name: '', phone: '' })
-    }, [dispatch, user])
+    useEffect(() => {
+        inputRef.current.focus()
+    }, []);
 
-    const handleSearch = useCallback((event) => {
-        event.preventDefault()
+    const handleSearch = useCallback(() => {
         dispatch(searchUserAsync({ name: user.name, phone: user.phone }))
     }, [dispatch, user])
 
-    const cancelSearch = () => {
+    const cancelSearch = useCallback(() => {
         dispatch(resetSearch())
         setUser({ name: '', phone: '' })
-    }
+    }, [dispatch])
 
     return (
         <View>
             <View>
-
                 <TextInput
                     style={styles.form}
                     placeholderTextColor="#85b35a"
-                    placeholder="insert new name"
+                    placeholder="insert name"
                     onChangeText={name => setUser({ ...user, name })}
                     defaultValue={user.name.toLocaleLowerCase()}
                     ref={inputRef}
@@ -48,31 +43,47 @@ export default function UserForm() {
                 <TextInput
                     style={styles.form}
                     placeholderTextColor="#85b35a"
-                    placeholder="insert new number"
+                    placeholder="insert number"
                     onChangeText={phone => setUser({ ...user, phone })}
                     defaultValue={user.phone.toLocaleLowerCase()}
                 />
             </View>
-
-            <View style={{ marginTop: 5 }}>
+            <View style={styles.row}>
                 <TouchableOpacity style={{
                     height: 30,
-                    width: '100%',
-                    backgroundColor: user.name.length > 0 || user.phone.length > 0 ? '#85b35a' : '#ffffff', borderRadius: 5,
+                    width: '49%',
+                    backgroundColor: user.name.length > 0 || user.phone.length > 0 ? '#85b35a' : '#ffffff',
+                    borderRadius: 5,
                     justifyContent: 'center',
                     elevation: 2,
-                }} onPress={handleSubmit}>
+
+                }} onPress={handleSearch}>
                     <Text style={{
                         textAlign: 'center',
                         color: user.name.length > 0 || user.phone.length > 0 ? '#ffffff' : '#85b35a',
                         fontSize: 19,
                         letterSpacing: 1,
                         fontWeight: 'bold',
-                    }}>save</Text>
+                    }}>search</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={{
+                    width: '49%',
+                    backgroundColor: user.name.length > 0 || user.phone.length > 0 ? '#85b35a' : '#ffffff',
+                    borderRadius: 5,
+                    justifyContent: 'center',
+                    elevation: 2,
+                }} onPress={cancelSearch}>
+                    <Text style={{
+                        textAlign: 'center',
+                        color: user.name.length > 0 || user.phone.length > 0 ? '#ffffff' : '#85b35a',
+                        fontSize: 19,
+                        letterSpacing: 1,
+                        fontWeight: 'bold',
+                    }}>reset</Text>
                 </TouchableOpacity>
             </View>
         </View>
-
     )
 }
 
@@ -85,6 +96,12 @@ const styles = StyleSheet.create({
         elevation: 2,
         borderRadius: 5,
         backgroundColor: '#ffffff',
-        color: '#173e07'
+        color: '#173e07',
     },
-})
+    row: {
+        marginTop: 5,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+    },
+});

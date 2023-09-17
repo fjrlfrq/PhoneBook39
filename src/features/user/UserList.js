@@ -11,10 +11,10 @@ import {
     createUserAsync,
     updateUserAsync,
     loadUserAsync
-  } from './UserSlice';
+} from './UserSlice';
 
 
-export default function UserList(props) {
+export default function UserList() {
 
     const users = useSelector(selectUser)
 
@@ -24,27 +24,40 @@ export default function UserList(props) {
         dispatch(readUserAsync())
     }, [dispatch]);
 
-    // const scrolling = useCallback((event) => {
-    //     var element = event.target;
-    //     if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-    //         dispatch(loadUserAsync())
-    //     }
-    // }, [dispatch])
-
     return (
-        <KeyboardAvoidingView>
-            <View style={{}}>
-                    {users.map((user, index) => (
+        <KeyboardAvoidingView style={{ flex: 1 }}
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
+            keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
+            enabled={Platform.OS === "ios" ? true : false}>
+            <View style={{
+                flex: 1,
+                maxHeight: 637,
+                minHeight: 500,
+                justifyContent: 'center'
+            }}>
+                <FlatList
+                    data={users}
+                    initialNumToRender={7}
+                    renderItem={({ item, index }) => (
                         <UserItem
-                            key={user.id}
+                            key={item.id}
                             no={index + 1}
-                            data={user}
-                            sent={user.sent}
-                            remove={() => dispatch(deleteUserAsync(user.id))}
-                            resend={() => dispatch(createUserAsync({id: user.id, name: user.name, phone: user.phone}))}
-                            update={(name, phone) => dispatch(updateUserAsync({id: user.id, name, phone}))}
+                            data={item}
+                            sent={item.sent}
+                            remove={() => dispatch(deleteUserAsync(item.id))}
+                            resend={() => dispatch(createUserAsync({ id: item.id, name: item.name, phone: item.phone }))}
+                            update={(name, phone) => dispatch(updateUserAsync({ id: item.id, name, phone }))}
                         />
-                    ))}
+                    )}
+                    keyExtractor={(item) => item.id}
+                    onEndReachedThreshold={0.5}
+                    onEndReached={() => dispatch(loadUserAsync())}
+                    style={{
+                        maxHeight: 580,
+                        borderColor: 'red',
+
+                    }}
+                />
             </View>
         </KeyboardAvoidingView>
     )

@@ -254,7 +254,8 @@ export const edit = (id, name, phone) => (dispatch, getState) => {
 
 export const resetSearch = () => async (dispatch, getState) => {
     await dispatch(reset())
-    dispatch(loadUserAsync())
-}
+    dispatch(readUserAsync())
+    console.log('ini reset');
+};
 
 export default userSlice.reducer
