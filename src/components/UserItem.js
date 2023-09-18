@@ -61,95 +61,110 @@ export default function UserItem(props) {
     })
 
     return (
-        <View>
-            <View style={{ flex: 1 }}>
-                <Text>{props.no}</Text>
-                <View>
-                    {user.isEdit ?
-                        <TextInput
-                            style={{ height: 40 }}
-                            placeholder="Enter Your Name"
-                            onChangeText={name => setUser({ ...user, name })}
-                            defaultValue={user.name}
-                            autoFocus={true}
-                        />
-                        :
-                        <View>
-                            <Text>{user.name}</Text>
+        <View style={{ flex: 1 }}>
+            <ScrollView style={styles.container}>
+                <View style={styles.cardWrapper}>
+                    <View style={styles.cardList}>
+                        <View style={{
+                            flexDirection: 'row',
+                            width: "80%",
+                            alignItems: 'center',
+                        }}>
+                            <View style={styles.number}>
+                                <Text style={styles.noText}>{props.no}</Text>
+                            </View>
+                            <View style={styles.icon}>
+                                <Icon name="person-circle-outline" size={50} color="#173e07" />
+                            </View>
+                            <View style={styles.card}>
+                                {user.isEdit ?
+                                    <TextInput
+                                        style={styles.userName}
+                                        placeholderTextColor="gray"
+                                        placeholder="Masukan Nama!"
+                                        onChangeText={name => setUser({ ...user, name })}
+                                        defaultValue={user.name}
+                                        autoFocus={true}
+                                    />
+                                    :
+                                    <View>
+                                        <Text style={styles.cardTitleName}>{user.name}</Text>
+                                    </View>
+                                }
+
+                                {user.isEdit ?
+                                    <TextInput
+                                        style={styles.userPhone}
+                                        placeholderTextColor="gray"
+                                        placeholder="Masukan Nomor!"
+                                        onChangeText={phone => setUser({ ...user, phone })}
+                                        defaultValue={user.phone}
+                                    />
+                                    :
+                                    <View>
+                                        <Text style={styles.cardTitlePhone}>{user.phone}</Text>
+                                    </View>
+                                }
+                            </View>
                         </View>
-                    }
-                </View>
 
-                <View>
-                    {user.isEdit ?
-                        <TextInput
-                            style={{ height: 40 }}
-                            placeholder="Enter Your Number"
-                            onChangeText={name => setUser({ ...user, phone })}
-                            defaultValue={user.phone}
-                            autoFocus={true}
-                        />
-                        :
-                        <View>
-                            <Text>{user.phone}</Text>
+
+                        <View style={styles.buttonList}>
+                            {props.data.sent ? user.isEdit ?
+                                <View style={{ flexDirection: "row" }}>
+                                    <TouchableOpacity style={{ marginHorizontal: 5, elevation: 2 }} onPress={saveEdit}>
+                                        <Icon name="save" size={30} color="#85b35a" />
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={handleCancel}>
+                                        <Icon name="arrow-back-circle" size={30} color="#bdd9a0" />
+                                    </TouchableOpacity>
+                                </View>
+                                :
+                                <View style={{ flexDirection: "row" }}>
+                                    <TouchableOpacity style={{ marginHorizontal: 5, elevation: 2 }} onPress={handleEdit}>
+                                        <Icon name="create" size={30} color="#4a8122" />
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={showModal}>
+                                        <Icon name="close-circle" size={30} color="#85b35a" />
+                                    </TouchableOpacity>
+                                </View>
+                                :
+                                <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={props.resend}>
+                                    <Icon name="refresh-circle" size={30} color="#4a8122" />
+                                </TouchableOpacity>
+                            }
                         </View>
-                    }
-                </View>
-
-
-                <View>
-                    {props.data.sent ?
-                        user.isEdit ?
-                        <View style={{}}>
-                        <TouchableOpacity style={{}} onPress={saveEdit}>
-                            <Icon name="save" size={30} color="#85b35a" />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{}} onPress={handleCancel}>
-                            <Icon name="arrow-back-circle" size={30} color="#bdd9a0" />
-                        </TouchableOpacity>
                     </View>
-                    :
-                    <View style={{}}>
-                        <TouchableOpacity style={{}} onPress={handleEdit}>
-                            <Icon name="create" size={30} color="#4a8122" />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{}} onPress={showModal}>
-                            <Icon name="close-circle" size={30} color="#85b35a" />
-                        </TouchableOpacity>
-                    </View>
-                    :
-                    <TouchableOpacity style={{}} onPress={props.resend}>
-                        <Icon name="refresh-circle" size={30} color="#4a8122" />
-                    </TouchableOpacity>
-                    }
                 </View>
-            </View>
+            </ScrollView>
 
             <View>
-                <Modal show={user.showHide}>
-                    <View style={{}}>
-                        <Icon name="alert-circle" size={80} color="#173e07"
-                            style={{}} />
-                    </View>
+                <Modal isVisible={user.modal}>
+                    <View style={styles.modalContainer}>
+                        <View style={styles.modalListIcon}>
+                            <Icon name="alert-circle" size={80} color="#173e07"
+                                style={styles.modalIcon} />
+                        </View>
 
-                    <Text style={{}}>Deleted Confirmation</Text>
-                    <Text style={{}}>
-                        Are you sure you want delete it?
-                    </Text>
-                    <Text style={{}}>
-                        " {props.data.name} "
-                    </Text>
-                    <View>
-                        <TouchableOpacity style={{}} onPress={showHide}>
-                            <Text style={{}}> No</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{}} onPress={props.remove}>
-                            <Text style={{}}> Yes</Text>
-                        </TouchableOpacity>
+                        <Text style={styles.titleModal}>Deleted Confirmation</Text>
+                        <Text style={{ textAlign: 'center', fontSize: 17, color: 'gray' }}>
+                            Are you sure you want delete it?
+                        </Text>
+                        <Text style={{ textAlign: 'center', fontSize: 17, fontWeight: 'bold', color: '#173e07' }}>
+                            " {props.data.name} "
+                        </Text>
+
+                        <View style={styles.buttonModal}>
+                            <TouchableOpacity style={styles.modalNo} onPress={showHide}>
+                                <Text style={{ color: '#ffffff' }}> No</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.modalYes} onPress={props.remove}>
+                                <Text style={{ color: '#ffffff' }}> Yes</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </Modal>
             </View>
-
         </View >
     )
 }

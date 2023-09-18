@@ -47,72 +47,102 @@ export default function User(props) {
     }, [dispatch])
 
     return (
-        <SafeAreaView style={{ flex: 1, }}>
+        <SafeAreaView
+            style={{
+                flex: 1,
+            }}>
             <View style={styles.container}>
                 <View>
                     {user.activeMenu == 'Search' || user.activeMenu == 'Add' ?
-                        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={handleCancel}>
-                            <Text style={{
-                                fontSize: 32,
-                                fontWeight: '700',
-                                color: '#4a8122',
-                                marginTop: 10,
-                            }}>
+                        <TouchableOpacity
+                            style={{
+                                flexDirection: 'row'
+                            }}
+                            onPress={handleCancel}>
+                            <Text
+                                style={{
+                                    fontSize: 32,
+                                    fontWeight: '700',
+                                    color: '#4a8122',
+                                    marginTop: 10,
+                                }}>
                                 PhoneBook
                             </Text>
-                            <Icon name="backward" size={20} color="#4a8122" style={{ paddingHorizontal: 4, marginTop: 20 }} />
+                            <Icon name="backward" size={20} color="#4a8122"
+                                style={{
+                                    paddingHorizontal: 4,
+                                    marginTop: 20
+                                }} />
                         </TouchableOpacity>
                         :
-                        <TouchableOpacity onPress={cancelSearch}>
-                            <Text style={styles.title}>
+                        <TouchableOpacity
+                            onPress={cancelSearch}>
+                            <Text
+                                style={styles.title}>
                                 PhoneBook
                             </Text>
                         </TouchableOpacity>
                     }
                 </View>
 
-                <View style={styles.box}>
+                <View
+                    style={styles.box}>
 
                     <View>
-                        <View style={{
-                            flexDirection: 'row',
-                            marginTop: 5,
-                            marginBottom: 5,
-                            paddingVertical: 5,
-                            paddingHorizontal: 5,
-                            borderRadius: 10,
-                            backgroundColor: '#ffffff',
-                            elevation: 2,
-                            width: '100%',
-                        }}>
-                            <TouchableOpacity style={{
-                                flex: 1,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: user.activeMenu == 'Search' ? '#4a8122' : '#ffffff',
-                                elevation: user.activeMenu == 'Search' ? 2 : 0,
-                                paddingVertical: 10,
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                                marginTop: 5,
+                                marginBottom: 5,
+                                paddingVertical: 5,
+                                paddingHorizontal: 5,
                                 borderRadius: 10,
-                            }}
-                                onPress={handleSearch}
-                            >
-                                <Text style={{ color: user.activeMenu == 'Search' ? '#ffffff' : '#4a8122', fontWeight: 'bold', letterSpacing: 1, fontSize: 19, margin: -2 }}>
+                                backgroundColor: '#ffffff',
+                                elevation: 2,
+                                width: '100%',
+                            }}>
+                            <TouchableOpacity
+                                style={{
+                                    flex: 1,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    backgroundColor: user.activeMenu == 'Search' ? '#4a8122' : '#ffffff',
+                                    elevation: user.activeMenu == 'Search' ? 2 : 0,
+                                    paddingVertical: 10,
+                                    borderRadius: 10,
+                                }}
+                                onPress={handleSearch}>
+                                <Text
+                                    style={{
+                                        color: user.activeMenu == 'Search' ? '#ffffff' : '#4a8122',
+                                        fontWeight: 'bold',
+                                        letterSpacing: 1,
+                                        fontSize: 19,
+                                        margin: -2
+                                    }}>
                                     search
                                 </Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={{
-                                flex: 1,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: user.activeMenu == 'Add' ? '#4a8122' : '#ffffff',
-                                elevation: user.activeMenu == 'Add' ? 2 : 0,
-                                paddingVertical: 10,
-                                borderRadius: 10,
-                            }}
-                                onPress={handleAdd}
-                            >
-                                <Text style={{ color: user.activeMenu == 'Add' ? '#ffffff' : '#4a8122', fontWeight: 'bold', letterSpacing: 1, fontSize: 19, margin: -2 }}>
+                            <TouchableOpacity
+                                style={{
+                                    flex: 1,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    backgroundColor: user.activeMenu == 'Add' ? '#4a8122' : '#ffffff',
+                                    elevation: user.activeMenu == 'Add' ? 2 : 0,
+                                    paddingVertical: 10,
+                                    borderRadius: 10,
+                                }}
+                                onPress={handleAdd}>
+                                <Text
+                                    style={{
+                                        color: user.activeMenu == 'Add' ? '#ffffff' : '#4a8122',
+                                        fontWeight: 'bold',
+                                        letterSpacing: 1,
+                                        fontSize: 19,
+                                        margin: -2
+                                    }}>
                                     add
                                 </Text>
                             </TouchableOpacity>
@@ -139,23 +169,35 @@ export default function User(props) {
                                 ''
                             }
                         </View>
-                        <View style={{ marginTop: 15 }} />
+                        <View
+                            style={{
+                                marginTop: 15
+                            }} />
                     </View>
 
                 </View>
             </View>
-            <View style={{ flex: 1 }}>
+            <View
+                style={{
+                    flex: 1
+                }}>
                 <UserList />
             </View>
-            <View style={styles.footer}>
+            <View
+                style={styles.footer}>
                 <View>
-                    <Icon name="copyright" size={12} color="#4a8122" style={{ paddingHorizontal: 1 }} />
+                    <Icon name="copyright" size={12} color="#4a8122"
+                        style={{
+                            paddingHorizontal: 1
+                        }} />
                 </View>
-                <Text style={styles.textFooter}>
+                <Text
+                    style={styles.textFooter}>
                     2023 Phonebook - by
                 </Text>
-                <Text style={styles.textFooterName}>
-                    Tantowi Alif Feryansyah
+                <Text
+                    style={styles.textFooterName}>
+                    Muhammad Fajar Al-Faruq
                 </Text>
             </View>
         </SafeAreaView>

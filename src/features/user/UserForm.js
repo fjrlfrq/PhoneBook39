@@ -17,20 +17,14 @@ export default function UserForm() {
         phone: ''
     })
 
+    useEffect(() => {
+        inputRef.current.focus()
+    }, []);
+
     const handleSubmit = useCallback(() => {
         dispatch(create(user.name, user.phone))
         setUser({ name: '', phone: '' })
     }, [dispatch, user])
-
-    const handleSearch = useCallback((event) => {
-        event.preventDefault()
-        dispatch(searchUserAsync({ name: user.name, phone: user.phone }))
-    }, [dispatch, user])
-
-    const cancelSearch = () => {
-        dispatch(resetSearch())
-        setUser({ name: '', phone: '' })
-    }
 
     return (
         <View>
@@ -54,21 +48,28 @@ export default function UserForm() {
                 />
             </View>
 
-            <View style={{ marginTop: 5 }}>
-                <TouchableOpacity style={{
-                    height: 30,
-                    width: '100%',
-                    backgroundColor: user.name.length > 0 || user.phone.length > 0 ? '#85b35a' : '#ffffff', borderRadius: 5,
-                    justifyContent: 'center',
-                    elevation: 2,
-                }} onPress={handleSubmit}>
-                    <Text style={{
-                        textAlign: 'center',
-                        color: user.name.length > 0 || user.phone.length > 0 ? '#ffffff' : '#85b35a',
-                        fontSize: 19,
-                        letterSpacing: 1,
-                        fontWeight: 'bold',
-                    }}>save</Text>
+            <View
+                style={{
+                    marginTop: 5
+                }}>
+                <TouchableOpacity
+                    style={{
+                        height: 30,
+                        width: '100%',
+                        backgroundColor: user.name.length > 0 || user.phone.length > 0 ? '#85b35a' : '#ffffff', borderRadius: 5,
+                        justifyContent: 'center',
+                        elevation: 2,
+                    }} onPress={handleSubmit}>
+                    <Text
+                        style={{
+                            textAlign: 'center',
+                            color: user.name.length > 0 || user.phone.length > 0 ? '#ffffff' : '#85b35a',
+                            fontSize: 19,
+                            letterSpacing: 1,
+                            fontWeight: 'bold',
+                        }}>
+                        save
+                    </Text>
                 </TouchableOpacity>
             </View>
         </View>
