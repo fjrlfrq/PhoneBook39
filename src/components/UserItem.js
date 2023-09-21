@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react"
-import Icon from 'react-native-vector-icons/Ionicons';
 import { useDispatch } from "react-redux"
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions, TextInput, ScrollView } from "react-native"
+import Icon from 'react-native-vector-icons/Ionicons';
 import Modal from "react-native-modal";
 
 const windowWidth = Dimensions.get('window').width;

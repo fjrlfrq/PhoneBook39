@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from "react"
+import React, { useCallback, useState, useEffect, useRef } from "react"
 import { Text, TextInput, View, StyleSheet, TouchableOpacity, Dimensions } from "react-native"
 
 const windowWidth = Dimensions.get('window').width;
