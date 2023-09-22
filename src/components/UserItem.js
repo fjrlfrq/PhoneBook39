@@ -70,11 +70,8 @@ export default function UserItem(props) {
                             width: "80%",
                             alignItems: 'center',
                         }}>
-                            <View style={styles.number}>
-                                <Text style={styles.noText}>{props.no}</Text>
-                            </View>
                             <View style={styles.icon}>
-                                <Icon name="person-circle-outline" size={50} color="#173e07" />
+                                <Icon name="person-circle" size={60} color="#E0E0E0" />
                             </View>
                             <View style={styles.card}>
                                 {user.isEdit ?
@@ -175,7 +172,6 @@ const styles = StyleSheet.create({
         // marginVertical: windowHeight * 0.01,
     },
     cardWrapper: {
-        borderBottomWidth: 1.5,
         borderColor: '#173e07'
     },
     cardList: {
@@ -200,8 +196,9 @@ const styles = StyleSheet.create({
         alignContent: 'center'
     },
     card: {
-        paddingBottom: 5,
-        paddingTop: 5,
+        paddingBottom: 10,
+        paddingTop: 10,
+        paddingLeft: 15,
         justifyContent: 'flex-start',
         borderColor: "red",
         width: '73%',
