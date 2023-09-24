@@ -122,7 +122,7 @@ export default function UserItem(props) {
                                         <Icon name="create" size={30} color="#4a8122" />
                                     </TouchableOpacity>
                                     <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={showModal}>
-                                        <Icon name="close-circle" size={30} color="#85b35a" />
+                                        <Icon name="trash" size={30} color="#85b35a" />
                                     </TouchableOpacity>
                                 </View>
                                 :

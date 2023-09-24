@@ -5,7 +5,7 @@ import UserSearch from "./UserSearch"
 import { useDispatch } from 'react-redux'
 import { resetSearch } from './UserSlice';
 import { View, Text, TouchableOpacity, Dimensions, SafeAreaView, StyleSheet } from "react-native"
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const windowWidth = Dimensions.get('window').width;
 // const windowHeight = Dimensions.get('window').height;
@@ -63,12 +63,12 @@ export default function User(props) {
                                 style={{
                                     fontSize: 32,
                                     fontWeight: '700',
-                                    color: '#4a8122',
+                                    color: '#FFFFFF',
                                     marginTop: 10,
                                 }}>
                                 PhoneBook
                             </Text>
-                            <Icon name="backward" size={20} color="#4a8122"
+                            <Icon name="play-back" size={25} color="#FFFFFF"
                                 style={{
                                     paddingHorizontal: 4,
                                     marginTop: 20
@@ -106,7 +106,7 @@ export default function User(props) {
                                     flex: 1,
                                     justifyContent: 'center',
                                     alignItems: 'center',
-                                    backgroundColor: user.activeMenu == 'Search' ? '#4a8122' : '#ffffff',
+                                    backgroundColor: user.activeMenu == 'Search' ? '#2E8E57' : '#ffffff',
                                     elevation: user.activeMenu == 'Search' ? 2 : 0,
                                     paddingVertical: 10,
                                     borderRadius: 10,
@@ -114,7 +114,7 @@ export default function User(props) {
                                 onPress={handleSearch}>
                                 <Text
                                     style={{
-                                        color: user.activeMenu == 'Search' ? '#ffffff' : '#4a8122',
+                                        color: user.activeMenu == 'Search' ? '#ffffff' : '#2E8E57',
                                         fontWeight: 'bold',
                                         letterSpacing: 1,
                                         fontSize: 19,
@@ -208,13 +208,13 @@ const styles = StyleSheet.create({
     container: {
         paddingHorizontal: windowWidth * 0.05,
         // marginVertical: windowHeight * 0.01,
-        backgroundColor: '#e9f3e0',
+        backgroundColor: '#2E8E57',
     },
     title: {
         textAlign: 'center',
         fontSize: 32,
         fontWeight: '700',
-        color: '#173e07',
+        color: '#FFFFFF',
         marginTop: 10,
     },
     box: {

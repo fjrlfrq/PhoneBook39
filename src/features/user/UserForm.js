@@ -63,7 +63,7 @@ export default function UserForm() {
                     <Text
                         style={{
                             textAlign: 'center',
-                            color: user.name.length > 0 || user.phone.length > 0 ? '#ffffff' : '#85b35a',
+                            color: user.name.length > 0 || user.phone.length > 0 ? '#ffffff' : '#2E8E57',
                             fontSize: 19,
                             letterSpacing: 1,
                             fontWeight: 'bold',
