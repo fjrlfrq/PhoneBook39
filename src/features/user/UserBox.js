@@ -5,7 +5,7 @@ import UserSearch from "./UserSearch"
 import { useDispatch } from 'react-redux'
 import { resetSearch } from './UserSlice';
 import { View, Text, TouchableOpacity, Dimensions, SafeAreaView, StyleSheet } from "react-native"
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const windowWidth = Dimensions.get('window').width;
 // const windowHeight = Dimensions.get('window').height;
@@ -68,7 +68,7 @@ export default function User(props) {
                                 }}>
                                 PhoneBook
                             </Text>
-                            <Icon name="play-back" size={25} color="#FFFFFF"
+                            <Icon name="backward" size={25} color="#FFFFFF"
                                 style={{
                                     paddingHorizontal: 4,
                                     marginTop: 20
@@ -96,7 +96,7 @@ export default function User(props) {
                                 marginBottom: 5,
                                 paddingVertical: 5,
                                 paddingHorizontal: 5,
-                                borderRadius: 10,
+                                borderRadius: 100,
                                 backgroundColor: '#ffffff',
                                 elevation: 2,
                                 width: '100%',
@@ -123,7 +123,6 @@ export default function User(props) {
                                     search
                                 </Text>
                             </TouchableOpacity>
-
                             <TouchableOpacity
                                 style={{
                                     flex: 1,
