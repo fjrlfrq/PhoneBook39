@@ -106,15 +106,13 @@ export default function User(props) {
                                     flex: 1,
                                     justifyContent: 'center',
                                     alignItems: 'center',
-                                    backgroundColor: user.activeMenu == 'Search' ? '#2E8E57' : '#ffffff',
-                                    elevation: user.activeMenu == 'Search' ? 2 : 0,
                                     paddingVertical: 10,
                                     borderRadius: 10,
                                 }}
                                 onPress={handleSearch}>
                                 <Text
                                     style={{
-                                        color: user.activeMenu == 'Search' ? '#ffffff' : '#2E8E57',
+                                        color: user.activeMenu == 'Search' ? 'black' : '#4a8122',
                                         fontWeight: 'bold',
                                         letterSpacing: 1,
                                         fontSize: 19,
@@ -128,15 +126,13 @@ export default function User(props) {
                                     flex: 1,
                                     justifyContent: 'center',
                                     alignItems: 'center',
-                                    backgroundColor: user.activeMenu == 'Add' ? '#4a8122' : '#ffffff',
-                                    elevation: user.activeMenu == 'Add' ? 2 : 0,
                                     paddingVertical: 10,
                                     borderRadius: 10,
                                 }}
                                 onPress={handleAdd}>
                                 <Text
                                     style={{
-                                        color: user.activeMenu == 'Add' ? '#ffffff' : '#4a8122',
+                                        color: user.activeMenu == 'Add' ? 'black' : '#4a8122',
                                         fontWeight: 'bold',
                                         letterSpacing: 1,
                                         fontSize: 19,
